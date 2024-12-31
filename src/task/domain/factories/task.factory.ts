@@ -4,6 +4,7 @@ import { Task } from '../task';
 
 export class TaskFactory {
   public static create(
+    userId: string,
     title: string,
     description: string,
     limitDate: Date,
@@ -11,6 +12,13 @@ export class TaskFactory {
   ) {
     const taskUuid = UUID();
     const statusTask = new TaskStatus(status as TaskStatus['value']);
-    return new Task(taskUuid, title, description, limitDate, statusTask);
+    return new Task(
+      taskUuid,
+      userId,
+      title,
+      description,
+      limitDate,
+      statusTask,
+    );
   }
 }
