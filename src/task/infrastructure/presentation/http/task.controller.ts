@@ -12,21 +12,24 @@ import { Observable } from 'rxjs';
 
 import { ResponseBuildingModel } from '../../../../common';
 import {
+  AssignUserUseCase,
   DeleteTaskUseCase,
   FindAllTaskUseCase,
   RegisterTaskCommand,
   RegisterTaskUseCase,
   UpdateInformationCommand,
   UpdateTaskUseCase,
+  AssignUserTaskCommand,
 } from '../../../application';
 import { Task } from '../../../domain';
-import { RegisterTaskDto, UpdateTaskDto } from './dto';
+import { AssignTaskDto, RegisterTaskDto, UpdateTaskDto } from './dto';
 
 @Controller('task')
 export class TaskController {
   constructor(
     private readonly findAllTaskUseCase: FindAllTaskUseCase,
     private readonly registerTaskUseCase: RegisterTaskUseCase,
+    private readonly assignUserTaskUseCase: AssignUserUseCase,
     private readonly updateTaskUseCase: UpdateTaskUseCase,
     private readonly deleteTaskUseCase: DeleteTaskUseCase,
   ) {}
@@ -47,6 +50,15 @@ export class TaskController {
         registerDtoTask.limitDate,
         registerDtoTask.userId ?? '',
       ),
+    );
+  }
+
+  @Post('assignTask')
+  public assignTaskToUser(
+    @Body() assignTask: AssignTaskDto,
+  ): Observable<ResponseBuildingModel<Task>> {
+    return this.assignUserTaskUseCase.execute(
+      new AssignUserTaskCommand(assignTask.taskId, assignTask.emailUser),
     );
   }
 

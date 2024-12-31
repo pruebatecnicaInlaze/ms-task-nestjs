@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { StoreModule } from './store';
+import { HttpAxiosModule } from './http';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { StoreModule } from './store';
       autoLoadEntities: true,
     }),
     StoreModule,
+    HttpAxiosModule,
   ],
-  exports: [TypeOrmModule, StoreModule],
+  exports: [TypeOrmModule, StoreModule, HttpAxiosModule],
 })
 export class TaskInfrastructureModule {}

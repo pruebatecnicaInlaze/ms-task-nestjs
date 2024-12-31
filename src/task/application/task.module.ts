@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TaskInfrastructureModule } from '../infrastructure';
 import {
+  AssignUserUseCase,
   DeleteTaskUseCase,
   FindAllTaskUseCase,
   RegisterTaskUseCase,
@@ -14,6 +15,7 @@ import { TaskController } from '../infrastructure/presentation';
   providers: [
     FindAllTaskUseCase,
     RegisterTaskUseCase,
+    AssignUserUseCase,
     UpdateTaskUseCase,
     DeleteTaskUseCase,
   ],
