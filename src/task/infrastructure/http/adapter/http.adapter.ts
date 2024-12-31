@@ -7,7 +7,7 @@ import { HttpRepository } from '../../../application';
 @Injectable()
 export class HttpAdapter implements HttpRepository {
   constructor(private readonly httpService: HttpService) {}
-  get<T>(url: string): Observable<T> {
+  public get<T>(url: string): Observable<T> {
     return this.httpService.get(url).pipe(map((response) => response.data));
   }
 }
