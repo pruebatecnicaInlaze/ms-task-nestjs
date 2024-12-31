@@ -3,16 +3,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { StoreModule } from './store';
 import { HttpAxiosModule } from './http';
+import { environment } from '../../config/environment.config';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'mi_usuario',
-      password: 'mi_contraseña',
-      database: 'mi_base_de_datos',
+      host: environment.database.host,
+      port: environment.database.port,
+      username: environment.database.username,
+      password: environment.database.password,
+      database: environment.database.database,
       synchronize: true,
       autoLoadEntities: true,
     }),

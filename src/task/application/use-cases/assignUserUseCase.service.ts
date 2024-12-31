@@ -1,9 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { map, Observable, switchMap } from 'rxjs';
+
+import { environment } from '../../../config';
 import { IUseCase, ResponseBuildingModel } from '../../../common';
 import { Task } from '../../domain';
-import { map, Observable, switchMap } from 'rxjs';
 import { HttpRepository, TaskRepository } from '../ports';
 import { AssignUserTaskCommand } from '../commands';
+import { UserResponseInterface } from './interface';
 
 @Injectable()
 export class AssignUserUseCase
@@ -13,26 +16,24 @@ export class AssignUserUseCase
     private readonly taskRepository: TaskRepository,
     private readonly httpRepository: HttpRepository,
   ) {}
+
   public execute(
     infoAssignTask: AssignUserTaskCommand,
   ): Observable<ResponseBuildingModel<Task>> {
     return this.httpRepository
-      .get<{
-        id: string;
-      }>(
-        `http://localhost:4040/users/findUserByEmail/${infoAssignTask.emailUser}`,
-      )
+      .get<
+        ResponseBuildingModel<UserResponseInterface>
+      >(`${environment.urlConnectionMicroserviceUser}/findUserByEmail/${infoAssignTask.emailUser}`)
       .pipe(
-        // map((userData) => userData.id),
-        switchMap((userId) => {
-          console.log(userId);
+        switchMap((response) => {
+          const userId = response.result.id;
           return this.taskRepository.findById(infoAssignTask.taskId).pipe(
-            switchMap((task) =>
-              this.taskRepository.update(task.id, {
-                userId,
-                ...task,
-              }),
-            ),
+            switchMap((task) => {
+              task.userId = userId;
+              return this.taskRepository
+                .update(task.id, task)
+                .pipe(map(() => task));
+            }),
           );
         }),
         map((task) => new ResponseBuildingModel(true, task, null)),
