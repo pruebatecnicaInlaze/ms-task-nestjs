@@ -1,9 +1,12 @@
-import { Task, TaskStatus } from '../../domain';
-import { IUseCase, ResponseBuildingModel } from '../../../common';
-import { UpdateInformationCommand } from '../commands';
+import { Injectable } from '@nestjs/common';
 import { map, mergeMap, Observable } from 'rxjs';
+
+import { IUseCase, ResponseBuildingModel } from '../../../common';
+import { Task, TaskStatus } from '../../domain';
+import { UpdateInformationCommand } from '../commands';
 import { TaskRepository } from '../ports';
 
+@Injectable()
 export class UpdateTaskUseCase
   implements IUseCase<UpdateInformationCommand, ResponseBuildingModel<Task>>
 {
