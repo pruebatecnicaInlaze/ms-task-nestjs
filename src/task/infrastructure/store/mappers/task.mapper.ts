@@ -1,9 +1,11 @@
-import { Task, TaskStatus, TypeStatus } from '../../../domain';
+import { Task, TaskStatus } from '../../../domain';
 import { TaskData } from '../entities';
 
 export class TaskMapper {
   public static toDomain(taskEntity: TaskData): Task {
-    const taskStatus = new TaskStatus(taskEntity.status as TypeStatus);
+    const taskStatus = new TaskStatus(
+      taskEntity.status as 'To_do' | 'In_progress' | 'Done',
+    );
     return new Task(
       taskEntity.id,
       taskEntity.userId,

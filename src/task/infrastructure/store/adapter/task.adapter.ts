@@ -27,12 +27,14 @@ export class TaskAdapter implements TaskRepository {
     );
   }
   public create(task: Task): Observable<Task> {
-    return from(this.taskRepository.save(task)).pipe(
-      map((createdTaskData) => TaskMapper.toDomain(createdTaskData)),
+    return from(this.taskRepository.save(TaskMapper.toEntity(task))).pipe(
+      map((updatedTask) => TaskMapper.toDomain(updatedTask)),
     );
   }
   public update(id: string, task: Task): Observable<Task> {
-    return from(this.taskRepository.update({ id }, task)).pipe(
+    return from(
+      this.taskRepository.update({ id }, TaskMapper.toEntity(task)),
+    ).pipe(
       switchMap(() => this.taskRepository.findOne({ where: { id } })),
       map((updatedTaskData) => TaskMapper.toDomain(updatedTaskData)),
     );

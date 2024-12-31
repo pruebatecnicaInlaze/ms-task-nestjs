@@ -1,4 +1,3 @@
-import { TypeStatus } from '../types';
 import { TaskStatus } from '../value-objects';
 
 export interface ITask {
@@ -7,5 +6,5 @@ export interface ITask {
   title: string;
   description: string;
   limitDate: Date;
-  status: TypeStatus | TaskStatus;
+  status: TaskStatus;
 }
