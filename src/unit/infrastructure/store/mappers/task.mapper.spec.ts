@@ -5,6 +5,7 @@ describe('TaskMapper', () => {
     const taskData: TaskData = {
       id: 'task1',
       userId: 'user1',
+      userName: 'User1 Test',
       title: 'Test Task',
       description: 'This is a test task',
       limitDate: new Date('2023-12-31'),
@@ -26,6 +27,7 @@ describe('TaskMapper', () => {
     const task = new Task(
       'task1',
       'user1',
+      'User1 Test',
       'Test Task',
       'This is a test task',
       new Date('2023-12-31'),

@@ -84,6 +84,7 @@ describe('TaskController', () => {
       new Task(
         '1',
         'user1',
+        'User1 Test',
         'Test Task',
         'This is a test task',
         new Date('2023-12-31'),
@@ -108,6 +109,7 @@ describe('TaskController', () => {
       new Task(
         'task1',
         'user1',
+        'User1 Test',
         'Test Task',
         'This is a test task',
         new Date('2023-12-31'),
@@ -134,6 +136,7 @@ describe('TaskController', () => {
       new Task(
         'task1',
         'user1',
+        'User1 Test',
         'Updated Task',
         'This is an updated task',
         new Date('2023-12-31'),

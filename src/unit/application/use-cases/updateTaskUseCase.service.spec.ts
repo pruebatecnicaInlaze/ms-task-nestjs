@@ -9,6 +9,7 @@ import {
   UpdateInformationCommand,
   UpdateTaskUseCase,
 } from '../../../task';
+import { NotFoundException } from '@nestjs/common';
 
 describe('UpdateTaskUseCase', () => {
   let updateTaskUseCase: UpdateTaskUseCase;
@@ -17,6 +18,7 @@ describe('UpdateTaskUseCase', () => {
   const task: Task = {
     id: 'task1',
     userId: 'user1',
+    userName: 'User1 Test',
     title: 'Test Task',
     description: 'This is a test task',
     limitDate: new Date('2023-12-31'),
@@ -69,9 +71,7 @@ describe('UpdateTaskUseCase', () => {
 
     updateTaskUseCase.execute(updateInformationCommand).subscribe({
       error: (error) => {
-        expect(error).toBeInstanceOf(ResponseBuildingModel);
-        expect(error.succeeded).toBe(false);
-        expect(error.error.code).toBe('ERROR_TASK_NOT_FOUND');
+        expect(error).toBeInstanceOf(NotFoundException);
         done();
       },
     });

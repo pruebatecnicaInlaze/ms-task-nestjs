@@ -5,6 +5,7 @@ describe('Task', () => {
     const id = '1';
     const userId = 'user1';
     const title = 'Test Task';
+    const userName = 'UserName Test Task';
     const description = 'This is a test task';
     const limitDate = new Date('2023-12-31');
     const status = 'In_progress';
@@ -12,6 +13,7 @@ describe('Task', () => {
     const task = new Task(
       id,
       userId,
+      userName,
       title,
       description,
       limitDate,

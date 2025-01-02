@@ -16,6 +16,7 @@ describe('RegisterTaskUseCase', () => {
   const task: Task = {
     id: 'task1',
     userId: 'user1',
+    userName: 'User1 Test',
     title: 'Test Task',
     description: 'This is a test task',
     limitDate: new Date('2023-12-31'),

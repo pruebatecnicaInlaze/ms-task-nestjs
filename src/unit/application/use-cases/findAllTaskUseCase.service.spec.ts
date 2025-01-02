@@ -16,6 +16,7 @@ describe('FindAllTaskUseCase', () => {
     {
       id: 'task1',
       userId: 'user1',
+      userName: 'User1 Test',
       title: 'Test Task 1',
       description: 'This is a test task 1',
       limitDate: new Date('2023-12-31'),
@@ -24,6 +25,7 @@ describe('FindAllTaskUseCase', () => {
     {
       id: 'task2',
       userId: 'user2',
+      userName: 'User2 Test',
       title: 'Test Task 2',
       description: 'This is a test task 2',
       limitDate: new Date('2023-12-31'),
