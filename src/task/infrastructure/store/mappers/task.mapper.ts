@@ -9,6 +9,7 @@ export class TaskMapper {
     return new Task(
       taskEntity.id,
       taskEntity.userId,
+      taskEntity.userName,
       taskEntity.title,
       taskEntity.description,
       taskEntity.limitDate,
@@ -20,6 +21,7 @@ export class TaskMapper {
     const entity = new TaskData();
     entity.id = task.id;
     entity.userId = task.userId;
+    entity.userName = task.userName;
     entity.title = task.title;
     entity.description = task.description;
     entity.limitDate = task.limitDate;

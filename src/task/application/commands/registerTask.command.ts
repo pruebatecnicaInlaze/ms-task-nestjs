@@ -4,5 +4,6 @@ export class RegisterTaskCommand {
     public readonly description: string,
     public readonly limitDate: Date,
     public readonly userId?: string,
+    public readonly userName?: string,
   ) {}
 }

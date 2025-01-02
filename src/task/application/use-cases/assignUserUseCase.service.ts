@@ -27,9 +27,11 @@ export class AssignUserUseCase
       .pipe(
         switchMap((response) => {
           const userId = response.result.id;
+          const userName = response.result.fullName;
           return this.taskRepository.findById(infoAssignTask.taskId).pipe(
             switchMap((task) => {
               task.userId = userId;
+              task.userName = userName;
               return this.taskRepository
                 .update(task.id, task)
                 .pipe(map(() => task));

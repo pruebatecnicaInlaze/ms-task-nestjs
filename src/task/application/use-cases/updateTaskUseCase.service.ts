@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { map, mergeMap, Observable } from 'rxjs';
 
 import { IUseCase, ResponseBuildingModel } from '../../../common';
@@ -17,11 +17,13 @@ export class UpdateTaskUseCase
     return this.taskRepository.findById(updateInformationCommand.taskId).pipe(
       map((task) => {
         if (!task) {
-          throw new ResponseBuildingModel(false, null, {
-            code: 'ERROR_TASK_NOT_FOUND',
-            error: 'Task not found',
-            title: 'Error',
-          });
+          throw new NotFoundException(
+            new ResponseBuildingModel(false, null, {
+              code: 'ERROR_TASK_NOT_FOUND',
+              error: 'Task not found',
+              title: 'Error',
+            }),
+          );
         }
         if (updateInformationCommand.title) {
           task.title = updateInformationCommand.title;

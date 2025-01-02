@@ -5,6 +5,7 @@ import { Task } from '../task';
 export class TaskFactory {
   public static create(
     userId: string,
+    userName: string,
     title: string,
     description: string,
     limitDate: Date,
@@ -15,6 +16,7 @@ export class TaskFactory {
     return new Task(
       taskUuid,
       userId,
+      userName,
       title,
       description,
       limitDate,

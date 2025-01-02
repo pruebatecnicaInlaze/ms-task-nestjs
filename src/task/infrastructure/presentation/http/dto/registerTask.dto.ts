@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import { IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class RegisterTaskDto {
@@ -11,6 +12,7 @@ export class RegisterTaskDto {
 
   @IsDate()
   @IsNotEmpty()
+  @Transform(({ value }) => new Date(value))
   public limitDate: Date;
 
   @IsString()

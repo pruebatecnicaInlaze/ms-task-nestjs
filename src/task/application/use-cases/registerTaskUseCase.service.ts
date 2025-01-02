@@ -16,6 +16,7 @@ export class RegisterTaskUseCase
   ): Observable<ResponseBuildingModel<Task>> {
     const task = TaskFactory.create(
       registerCommand.userId,
+      registerCommand.userName,
       registerCommand.title,
       registerCommand.description,
       registerCommand.limitDate,
