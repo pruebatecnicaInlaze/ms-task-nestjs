@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { map, mergeMap, Observable } from 'rxjs';
 
 import { IUseCase, ResponseBuildingModel } from '../../../common';
-import { Task, TaskStatus } from '../../domain';
+import { Task, TaskFactory, TaskStatus } from '../../domain';
 import { UpdateInformationCommand } from '../commands';
 import { TaskRepository } from '../ports';
 
@@ -38,7 +38,18 @@ export class UpdateTaskUseCase
           task.status =
             updateInformationCommand.statusTask as unknown as TaskStatus;
         }
-        return this.taskRepository.update(task.id, task);
+        return this.taskRepository.update(
+          task.id,
+          TaskFactory.update(
+            task.id,
+            task.userId,
+            task.userName,
+            task.title,
+            task.description,
+            task.limitDate,
+            task.status,
+          ),
+        );
       }),
       mergeMap((updatedTask) =>
         updatedTask.pipe(map((task) => new ResponseBuildingModel(true, task))),

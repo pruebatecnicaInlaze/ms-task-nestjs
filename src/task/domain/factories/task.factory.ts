@@ -23,4 +23,24 @@ export class TaskFactory {
       statusTask,
     );
   }
+
+  public static update(
+    taskId: string,
+    userId: string,
+    userName: string,
+    title: string,
+    description,
+    limitDate: Date,
+    status: TaskStatus,
+  ) {
+    return new Task(
+      taskId,
+      userId,
+      userName,
+      title,
+      description,
+      limitDate,
+      status,
+    );
+  }
 }
